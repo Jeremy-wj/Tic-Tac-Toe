@@ -1,8 +1,7 @@
 import java.util.Scanner;
 public class Main {
-
-
     public static void main(String[] args) {
+        // Intro to Game
         System.out.println("Welcome to Tic-Tac-Toe!");
         System.out.println("Find a friend and take turns playing!");
         System.out.println("Type in \"Start\" to begin!");
@@ -11,12 +10,14 @@ public class Main {
         while (!(start.equals("Start")) && !(start.equals("start"))) {
             start = startScanner.nextLine();
         }
-
+        
+        //Set up board and variables
         String board[][] = { {"-","-","-"},{"-","-","-"},{"-","-","-"} };
         boolean gameDone = false;
         boolean oTurn = true;
         boolean xTurn = false;
 
+        //Main Game Loop
         while (!gameDone) {
             while (oTurn) {
                 System.out.println("O's turn!");
@@ -35,51 +36,162 @@ public class Main {
 
                 Scanner oInputScanner = new Scanner(System.in);
                 int oInput = oInputScanner.nextInt();
-                while (oInput > 9 || oInput < 1) {
-                    oInput = oInputScanner.nextInt();
-                }
-                System.out.println("You chose position " + Integer.toString(oInput) + "!");
-                //Next time - use code to update the board depending on the input right here
-                switch (oInput) {
-                    case 1:
-                        board[0][0] = "O";
-                        break;
-                    case 2:
-                        board[0][1] = "O";
-                        break;
-                    case 3:
-                        board [0][2] = "O";
-                        break;
-                    case 4:
-                        board[1][0] = "O";
-                        break;
-                    case 5:
-                        board[1][1] = "O";
-                        break;
-                    case 6:
-                        board [1][2] = "O";
-                        break;
-                    case 7:
-                        board[2][0] = "O";
-                        break;
-                    case 8:
-                        board[2][1] = "O";
-                        break;
-                    case 9:
-                        board [2][2] = "O";
-                        break;
-                    default: System.out.println("Error: This message should not appear");
+
+                boolean validInputO = false;
+                while (validInputO == false) {
+                    validInputO = true;
+
+                    while (oInput > 9 || oInput < 1) {
+                        oInput = oInputScanner.nextInt();
+                    }
+                    switch (oInput) {
+                        case 1:
+                            if (board[0][0].equals("O") || board[0][0].equals("X")) {
+                                System.out.println("That space is already occupied!");
+                                validInputO = false;
+                                break;
+                            } else {
+                                board[0][0] = "O";
+                                validInputO = true;
+
+                                break;
+                            }
+                        case 2:
+                            if (board[0][1].equals("O") || board[0][1].equals("X")) {
+                                System.out.println("That space is already occupied!");
+                                validInputO = false;
+                                break;
+                            } else {
+                                board[0][1] = "O";
+                                validInputO = true;
+                                break;
+                            }
+                        case 3:
+                            if (board[0][2].equals("O") || board[0][2].equals("X")) {
+                                System.out.println("That space is already occupied!");
+                                validInputO = false;
+                                break;
+                            } else {
+                                board[0][2] = "O";
+                                validInputO = true;
+                                break;
+                            }
+                        case 4:
+                            if (board[1][0].equals("O") || board[1][0].equals("X")) {
+                                System.out.println("That space is already occupied!");
+                                validInputO = false;
+                                break;
+                            } else {
+                                board[1][0] = "O";
+                                validInputO = true;
+                                break;
+                            }
+                        case 5:
+                            if (board[1][1].equals("O") || board[1][1].equals("X")) {
+                                System.out.println("That space is already occupied!");
+                                validInputO = false;
+                                break;
+                            } else {
+                                board[1][1] = "O";
+                                validInputO = true;
+                                break;
+                            }
+                        case 6:
+                            if (board[1][2].equals("O") || board[1][2].equals("X")) {
+                                System.out.println("That space is already occupied!");
+                                validInputO = false;
+                                break;
+                            } else {
+                                board[1][2] = "O";
+                                validInputO = true;
+                                break;
+                            }
+                        case 7:
+                            if (board[2][0].equals("O") || board[2][0].equals("X")) {
+                                System.out.println("That space is already occupied!");
+                                validInputO = false;
+                                break;
+                            } else {
+                                board[2][0] = "O";
+                                validInputO = true;
+                                break;
+                            }
+                        case 8:
+                            if (board[2][1].equals("O") || board[2][1].equals("X")) {
+                                System.out.println("That space is already occupied!");
+                                validInputO = false;
+                                break;
+                            } else {
+                                board[2][1] = "O";
+                                validInputO = true;
+                                break;
+                            }
+                        case 9:
+                            if (board[2][2].equals("O") || board[2][2].equals("X")) {
+                                System.out.println("That space is already occupied!");
+                                validInputO = false;
+                                break;
+                            } else {
+                                board[2][2] = "O";
+                                validInputO = true;
+                                break;
+                            }
+                        default: System.out.println("Error: This message should not appear");
+                    }
+                    oInput = 0;
                 }
 
+                //Print out board
                 for (int i = 0; i < board.length; i++) {
                     for (int j = 0; (board[i] != null && j < board[i].length); j++)
                         System.out.print(board[i][j] + " ");
                     System.out.println();
                 }
 
-                xTurn = true;
-                oTurn = false;
 
+                if (board[0][0].equals("O") && board[0][1].equals("O") && board[0][2].equals("O")) {
+                    gameDone = true;
+                    System.out.println("O wins!");
+                    break;
+                } else if (board[1][0].equals("O") && board[1][1].equals("O") && board[1][2].equals("O")) {
+                    gameDone = true;
+                    System.out.println("O wins!");
+                    break;
+                } else if (board[2][0].equals("O") && board[2][1].equals("O") && board[2][2].equals("O")) {
+                    gameDone = true;
+                    System.out.println("O wins!");
+                    break;
+                } else if (board[0][0].equals("O") && board[1][0].equals("O") && board[2][0].equals("O")) {
+                    gameDone = true;
+                    System.out.println("O wins!");
+                    break;
+                } else if (board[0][1].equals("O") && board[1][1].equals("O") && board[2][1].equals("O")) {
+                    gameDone = true;
+                    System.out.println("O wins!");
+                    break;
+                } else if (board[0][2].equals("O") && board[1][2].equals("O") && board[2][2].equals("O")) {
+                    gameDone = true;
+                    System.out.println("O wins!");
+                    break;
+                } else if (board[0][0].equals("O") && board[1][1].equals("O") && board[2][2].equals("O")) {
+                    gameDone = true;
+                    System.out.println("O wins!");
+                    break;
+                } else if (board[0][2].equals("O") && board[1][1].equals("O") && board[2][0].equals("O")) {
+                    gameDone = true;
+                    System.out.println("O wins!");
+                    break;
+                } else {
+                    if (!(board[0][0].equals("-")) && !(board[0][1].equals("-")) && !(board[0][2].equals("-")) && !(board[1][0].equals("-")) && !(board[1][1].equals("-")) && !(board[1][2].equals("-")) && !(board[2][0].equals("-")) && !(board[2][1].equals("-")) && !(board[2][2].equals("-"))) {
+                        gameDone = true;
+                        System.out.println("Tie! Game Over!");
+                        break;
+                    } else {
+                        System.out.println("Switching turns!");
+                        xTurn = true;
+                        oTurn = false;
+                    }
+                }
             }
 
 
@@ -101,40 +213,108 @@ public class Main {
 
                 Scanner xInputScanner = new Scanner(System.in);
                 int xInput = xInputScanner.nextInt();
-                while (xInput > 9 || xInput < 1) {
-                    xInput = xInputScanner.nextInt();
-                }
-                System.out.println("You chose position " + Integer.toString(xInput) + "!");
-                //Next time - use code to update the board depending on the input right here
-                switch (xInput) {
-                    case 1:
-                        board[0][0] = "X";
-                        break;
-                    case 2:
-                        board[0][1] = "X";
-                        break;
-                    case 3:
-                        board [0][2] = "X";
-                        break;
-                    case 4:
-                        board[1][0] = "X";
-                        break;
-                    case 5:
-                        board[1][1] = "X";
-                        break;
-                    case 6:
-                        board [1][2] = "X";
-                        break;
-                    case 7:
-                        board[2][0] = "X";
-                        break;
-                    case 8:
-                        board[2][1] = "X";
-                        break;
-                    case 9:
-                        board [2][2] = "X";
-                        break;
-                    default: System.out.println("Error: This message should not appear");
+                boolean validInputX = false;
+                while (validInputX == false) {
+                    validInputX = true;
+
+                    while (xInput > 9 || xInput < 1) {
+                        xInput = xInputScanner.nextInt();
+                    }
+
+                    switch (xInput) {
+                        case 1:
+                            if (board[0][0].equals("O") || board[0][0].equals("X")) {
+                                System.out.println("That space is already occupied!");
+                                validInputX = false;
+                                break;
+                            } else {
+                                board[0][0] = "X";
+                                validInputX = true;
+                                break;
+                            }
+                        case 2:
+                            if (board[0][1].equals("O") || board[0][1].equals("X")) {
+                                System.out.println("That space is already occupied!");
+                                validInputX = false;
+                                break;
+                            } else {
+                                board[0][1] = "X";
+                                validInputX = true;
+                                break;
+                            }
+                        case 3:
+                            if (board[0][2].equals("O") || board[0][2].equals("X")) {
+                                System.out.println("That space is already occupied!");
+                                validInputX = false;
+                                break;
+                            } else {
+                                board[0][2] = "X";
+                                validInputX = true;
+                                break;
+                            }
+                        case 4:
+                            if (board[1][0].equals("O") || board[1][0].equals("X")) {
+                                System.out.println("That space is already occupied!");
+                                validInputX = false;
+                                break;
+                            } else {
+                                board[1][0] = "X";
+                                validInputX = true;
+                                break;
+                            }
+                        case 5:
+                            if (board[1][1].equals("O") || board[1][1].equals("X")) {
+                                System.out.println("That space is already occupied!");
+                                validInputX = false;
+                                break;
+                            } else {
+                                board[1][1] = "X";
+                                validInputX = true;
+                                break;
+                            }
+                        case 6:
+                            if (board[1][2].equals("O") || board[1][2].equals("X")) {
+                                System.out.println("That space is already occupied!");
+                                validInputX = false;
+                                break;
+                            } else {
+                                board[1][2] = "X";
+                                validInputX = true;
+                                break;
+                            }
+                        case 7:
+                            if (board[2][0].equals("O") || board[2][0].equals("X")) {
+                                System.out.println("That space is already occupied!");
+                                validInputX = false;
+                                break;
+                            } else {
+                                board[2][0] = "X";
+                                validInputX = true;
+                                break;
+                            }
+                        case 8:
+                            if (board[2][1].equals("O") || board[2][1].equals("X")) {
+                                System.out.println("That space is already occupied!");
+                                validInputX = false;
+                                break;
+                            } else {
+                                board[2][1] = "X";
+                                validInputX = true;
+                                break;
+                            }
+                        case 9:
+                            if (board[2][2].equals("O") || board[2][2].equals("X")) {
+                                System.out.println("That space is already occupied!");
+                                validInputX = false;
+                                break;
+                            } else {
+                                board[2][2] = "X";
+                                validInputX = true;
+                                break;
+                            }
+                        default: System.out.println("Error: This message should not appear");
+                    }
+                    xInput = 0;
                 }
 
                 for (int i = 0; i < board.length; i++) {
@@ -143,12 +323,51 @@ public class Main {
                     System.out.println();
                 }
 
-                oTurn = true;
-                xTurn = false;
+
+                if (board[0][0].equals("X") && board[0][1].equals("X") && board[0][2].equals("X")) {
+                    gameDone = true;
+                    System.out.println("X wins!");
+                    break;
+                } else if (board[1][0].equals("X") && board[1][1].equals("X") && board[1][2].equals("X")) {
+                    gameDone = true;
+                    System.out.println("X wins!");
+                    break;
+                } else if (board[2][0].equals("X") && board[2][1].equals("X") && board[2][2].equals("X")) {
+                    gameDone = true;
+                    System.out.println("X wins!");
+                    break;
+                } else if (board[0][0].equals("X") && board[1][0].equals("X") && board[2][0].equals("X")) {
+                    gameDone = true;
+                    System.out.println("X wins!");
+                    break;
+                } else if (board[0][1].equals("X") && board[1][1].equals("X") && board[2][1].equals("X")) {
+                    gameDone = true;
+                    System.out.println("X wins!");
+                    break;
+                } else if (board[0][2].equals("X") && board[1][2].equals("X") && board[2][2].equals("X")) {
+                    gameDone = true;
+                    System.out.println("X wins!");
+                    break;
+                } else if (board[0][0].equals("X") && board[1][1].equals("X") && board[2][2].equals("X")) {
+                    gameDone = true;
+                    System.out.println("X wins!");
+                    break;
+                } else if (board[0][2].equals("X") && board[1][1].equals("X") && board[2][0].equals("X")) {
+                    gameDone = true;
+                    System.out.println("X wins!");
+                    break;
+                } else {
+                    if (!(board[0][0].equals("-")) && !(board[0][1].equals("-")) && !(board[0][2].equals("-")) && !(board[1][0].equals("-")) && !(board[1][1].equals("-")) && !(board[1][2].equals("-")) && !(board[2][0].equals("-")) && !(board[2][1].equals("-")) && !(board[2][2].equals("-"))) {
+                        gameDone = true;
+                        System.out.println("Tie! Game Over!");
+                        break;
+                    } else {
+                        System.out.println("Switching turns!");
+                        oTurn = true;
+                        xTurn = false;
+                    }
+                }
             }
-
         }
-
-
     }
 }
